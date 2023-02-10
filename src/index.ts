@@ -20,7 +20,7 @@ export const Footer = styled.footer`
     background-color: #004563;
     background-image: url(${footerBg});
     background-size: cover;
-    padding: 2rem;
+    padding: 6rem 2rem;
 `
 
 export const FooterContainer = styled.div`
@@ -44,11 +44,6 @@ export const AboutContainer = styled.div`
     .btn--container {
         display: flex;
         gap: 1.5rem;
-
-        @media (max-width: 465px){
-            flex-direction: column;
-            align-items: center;
-        }
     }
 
     .icons--container {
@@ -66,6 +61,27 @@ export const AboutContainer = styled.div`
     .copy {
         font-size: 0.8rem;
     }
+
+    .read-more {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        line-height: 0;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media (max-width: 465px){
+        .btn--container {
+            flex-direction: column;
+            align-items: center;
+            }
+        }
 
 `
 

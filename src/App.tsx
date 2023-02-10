@@ -1,4 +1,4 @@
-import { EnvelopeOpen, Globe, WhatsappLogo } from "phosphor-react";
+import { ArrowRight, EnvelopeOpen, Globe, WhatsappLogo } from "phosphor-react";
 import { AboutContainer, Button, Footer, FooterContainer, MainContainer } from ".";
 import { Header } from "./components/Header";
 import { ProductBox } from "./components/ProductsBox";
@@ -32,6 +32,7 @@ export function App(){
                 7500m², a estrutura logística de produção é informatizada e altamente
                 moderna, assim como a estrutura de armazenagem.
             </p>
+            <a className="read-more" href="https://www.login.com.br/nossa-historia" target="_blank" rel="noreferrer"><ArrowRight size={20} weight="bold" /> LEIA MAIS SOBRE A LOGIN</a>
             <div className="btn--container">
               <Button variant="primary"> CADASTRE-SE</Button>
               <Button variant="whats"><WhatsappLogo size={32} weight="regular" /> CHAMAR NO WHATS</Button>
