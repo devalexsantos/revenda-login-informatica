@@ -5,7 +5,8 @@ export const HeaderContainer = styled.header`
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 65vh;
+    height: 600px;
+    padding: 1rem;
     color: white;
     background-image: url(${bgHead});
     background-size: cover;

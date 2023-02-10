@@ -40,6 +40,10 @@ export const ProductItem = styled.div`
   img {
     max-width: 180px;
   }
+
+  p {
+    padding: 1rem;
+  }
 `
 
 export const ButtonProduct = styled.button`
