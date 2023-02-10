@@ -1,21 +1,20 @@
 import { useState } from "react";
-import { DesktopTower, Keyboard } from "phosphor-react"
+import { DesktopTower, GameController, Keyboard } from "phosphor-react"
 import { ButtonProduct, ProductBoxContainer, ProductBoxContent, ProductBoxHeader, ProductItem } from "./style"
 
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-
-import { DesktopList } from '../../dataProducts/desktops/DesktopsList'
-
-import desktopProduct from '../../assets/products/desktops/desktop-example.jpg';
+import { DeskTopListType } from "../../dataProducts/desktops/DesktopsList";
 
 
 interface ProductBoxProps {
-    icon: 'desktops' | 'accessories'
+    icon: 'desktops' | 'accessories' | 'gamer'
     title: string
+    data: {img: string, title: string}[]
+    slidePerView?: number
 }
 
-export function ProductBox({icon, title}: ProductBoxProps) {
+export function ProductBox({icon, title, data}: ProductBoxProps) {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -66,7 +65,7 @@ export function ProductBox({icon, title}: ProductBoxProps) {
             )}
           </svg>
         )
-      }
+    }
     
     function createIcon(i: any) {
         switch(i){
@@ -75,6 +74,9 @@ export function ProductBox({icon, title}: ProductBoxProps) {
             }
             case 'accessories': {
                 return <Keyboard size={32} weight="bold" />
+            }
+            case 'gamer': {
+              return <GameController size={32} weight="bold" />
             }
             default: {
                 return;
@@ -90,7 +92,7 @@ export function ProductBox({icon, title}: ProductBoxProps) {
             </ProductBoxHeader>
             <div className="navigation-wrapper">
               <ProductBoxContent ref={sliderRef} className="keen-slider">
-                {DesktopList && DesktopList.map((product, index) => (
+                {data && data.map((product, index) => (
                   <ProductItem className="keen-slider__slide">
                     <img src={product.img} alt="" />
                     <p>{product.title}</p>

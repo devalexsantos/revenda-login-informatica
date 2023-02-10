@@ -5,5 +5,7 @@ margin: auto;
     max-width: 1124px;
     padding: 2rem;
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
     justify-content: center;
 `
