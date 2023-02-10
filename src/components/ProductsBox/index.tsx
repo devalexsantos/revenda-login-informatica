@@ -123,20 +123,6 @@ export function ProductBox({icon, title, data}: ProductBoxProps) {
           </>
               )}
         </div>
-              {loaded && instanceRef.current && (
-                <div className="dots">
-                  {[
-                    ...Array(instanceRef.current.track.details.slides.length).keys(),
-                  ].map((idx) => {
-                    return (
-                      <button
-                        key={idx}
-                        className={"dot" + (currentSlide === idx ? " active" : "")}
-                      ></button>
-                    )
-                  })}
-                </div>
-                )}
         </ProductBoxContainer>
     )
 }

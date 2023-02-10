@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const ProductBoxContainer = styled.div`
     width: 100%;
-    margin-right: 1rem;
     padding: 1rem;
 `
 
@@ -43,6 +42,7 @@ export const ProductItem = styled.div`
 
   p {
     padding: 1rem;
+    font-weight: 700;
   }
 `
 
@@ -55,4 +55,9 @@ export const ButtonProduct = styled.button`
   border-radius: 6px;
   cursor: pointer;
   margin-top: auto;
+  transition: 0.1s ease-in-out;
+
+  &:hover {
+    background-color: #FF8A00;
+  }
 `
