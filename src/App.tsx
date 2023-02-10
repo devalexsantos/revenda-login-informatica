@@ -5,6 +5,7 @@ import { Separator } from "./components/Separator";
 
 import { DesktopList } from './dataProducts/desktops/DesktopsList';
 import { PCGamerList } from './dataProducts/gamer/PCGamerList';
+import { MiniPCList } from "./dataProducts/miniPCs/MiniPCList";
 
 export function App(){
 
@@ -15,6 +16,7 @@ export function App(){
       <MainContainer>
         <ProductBox title="COMPUTADORES" icon="desktops" data={DesktopList} />
         <ProductBox title="LINHA GAMER" icon="gamer" data={PCGamerList} />
+        <ProductBox title="MINI PCS" icon="desktops" data={MiniPCList} />
       </MainContainer>
     </>
   )
