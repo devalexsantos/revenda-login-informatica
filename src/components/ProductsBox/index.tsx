@@ -5,6 +5,8 @@ import { ButtonProduct, ProductBoxContainer, ProductBoxContent, ProductBoxHeader
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
+import { DesktopList } from '../../dataProducts/desktops/DesktopsList'
+
 import desktopProduct from '../../assets/products/desktops/desktop-example.jpg';
 
 
@@ -88,35 +90,13 @@ export function ProductBox({icon, title}: ProductBoxProps) {
             </ProductBoxHeader>
             <div className="navigation-wrapper">
               <ProductBoxContent ref={sliderRef} className="keen-slider">
-                      <ProductItem className="keen-slider__slide">
-                          <img src={desktopProduct} alt="" />
-                          <p>Computador Desktop LoginIntel Celeron N4020 SSD120Gb 4Gb Drd4 3200MHzWindows 11 Home</p>
-                          <ButtonProduct>VER PREÇO</ButtonProduct>
-                      </ProductItem>
-
-                      <ProductItem className="keen-slider__slide">
-                          <img src={desktopProduct} alt="" />
-                          <p>Computador Desktop LoginIntel Celeron N4020 SSD120Gb 4Gb Drd4 3200MHzWindows 11 Home</p>
-                          <ButtonProduct>VER PREÇO</ButtonProduct>
-                      </ProductItem>
-
-                      <ProductItem className="keen-slider__slide">
-                          <img src={desktopProduct} alt="" />
-                          <p>Computador Desktop LoginIntel Celeron N4020 SSD120Gb 4Gb Drd4 3200MHzWindows 11 Home</p>
-                          <ButtonProduct>VER PREÇO</ButtonProduct>
-                      </ProductItem>
-
-                      <ProductItem className="keen-slider__slide">
-                          <img src={desktopProduct} alt="" />
-                          <p>Computador Desktop LoginIntel Celeron N4020 SSD120Gb 4Gb Drd4 3200MHzWindows 11 Home</p>
-                          <ButtonProduct>VER PREÇO</ButtonProduct>
-                      </ProductItem>
-
-                      <ProductItem className="keen-slider__slide">
-                          <img src={desktopProduct} alt="" />
-                          <p>Computador Desktop LoginIntel Celeron N4020 SSD120Gb 4Gb Drd4 3200MHzWindows 11 Home ULTIMO</p>
-                          <ButtonProduct>VER PREÇO</ButtonProduct>
-                      </ProductItem>
+                {DesktopList && DesktopList.map((product, index) => (
+                  <ProductItem className="keen-slider__slide">
+                    <img src={product.img} alt="" />
+                    <p>{product.title}</p>
+                    <ButtonProduct>VER PREÇO</ButtonProduct>
+                  </ProductItem>
+                ))}
               </ProductBoxContent>
 
               {loaded && instanceRef.current && (
@@ -139,8 +119,22 @@ export function ProductBox({icon, title}: ProductBoxProps) {
               }
             />
           </>
-        )}
+              )}
         </div>
+              {loaded && instanceRef.current && (
+                <div className="dots">
+                  {[
+                    ...Array(instanceRef.current.track.details.slides.length).keys(),
+                  ].map((idx) => {
+                    return (
+                      <button
+                        key={idx}
+                        className={"dot" + (currentSlide === idx ? " active" : "")}
+                      ></button>
+                    )
+                  })}
+                </div>
+                )}
         </ProductBoxContainer>
     )
 }
