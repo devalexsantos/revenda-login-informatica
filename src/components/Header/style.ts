@@ -33,6 +33,7 @@ export const HeaderContent = styled.div`
             margin-top: 2rem;
             display: flex;
             gap: 2rem;
+            
         }
 
     }
@@ -43,6 +44,23 @@ export const HeaderContent = styled.div`
         width: 100%;
         max-width: 392px;
         max-height: 392px;
+    }
+
+    @media (max-width: 999px){
+        justify-content: center;
+        img {
+            display: none;
+        }
+
+        .info-header h1 {
+            font-size: 3.5rem;
+            text-align: center;
+        }
+
+        .btns-container {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 `
 

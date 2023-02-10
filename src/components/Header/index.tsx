@@ -10,7 +10,7 @@ export function Header(){
                     <h1>SEJA UM REVENDEDOR LOGIN</h1>
                     <div className="btns-container">
                         <Button variant="primary">CADASTRE-SE</Button>
-                        <Button variant="whats"><WhatsappLogo size={32} weight="regular" /> CHAMAR NO WHATS</Button>
+                        <Button variant="whats"><WhatsappLogo size={24} weight="regular" /> CHAMAR NO WHATS</Button>
                     </div>
                 </div>
                 <img src={sellerVector} alt="Seja um revendedor" />
