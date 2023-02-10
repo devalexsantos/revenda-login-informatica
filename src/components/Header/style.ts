@@ -77,7 +77,7 @@ export const Button = styled.button<ButtonProps>`
     padding: 0.8rem 2rem;
     color: white;
     border: none;
-    font-weight: 900;
+    font-weight: 700;
     cursor: pointer;
 
     background-color: ${(props) => {
