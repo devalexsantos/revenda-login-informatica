@@ -11,6 +11,7 @@ export const SeparatorContainer = styled.div`
         text-transform: uppercase;
         font-weight: 900;
         color: white;
+        white-space: nowrap;
     }
 
     div {
