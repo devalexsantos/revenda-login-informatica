@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const WhatsAppBoxContainer = styled.div`
   position: fixed;
-  top: 45vh;
+  top: 70vh;
   right: 10px;
   padding: 0.3rem 1rem;
   background-color: #00AD00;
@@ -24,6 +24,16 @@ export const WhatsAppBoxContainer = styled.div`
   }
 
   @media(max-width: 475px){
-    top: 90vh;
+    top: 80vh;
+
+    img {
+    width: 40px;
+    height: 40px;
+    }
+
+    .whatsApp-name {
+    font-size: 1rem;
+    }
+    
   }
 `
