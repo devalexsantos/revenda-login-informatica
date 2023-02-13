@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const SignUpContainer = styled.div`
   width: 100%;
@@ -77,34 +77,34 @@ export const SignUpContainer = styled.div`
 `
 
 export const BoxInfoContainer = styled.div`
-    width: 100%;
-    padding: 1rem;
+  width: 100%;
+  padding: 1rem;
 `
 
 export const BoxInfoHeader = styled.div`
-    display: flex;
-    background-color: #004563;
-    padding: 0.8rem;
-    color: white;
-    gap: 0.8rem;
-    align-items: center;
+  display: flex;
+  background-color: #004563;
+  padding: 0.8rem;
+  color: white;
+  gap: 0.8rem;
+  align-items: center;
 
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 900;
-    }
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
 `
 
 export const BoxInfoContent = styled.div`
   margin-top: 1px;
-  background-color: #FAFAFB;
+  background-color: #fafafb;
   padding: 1rem;
 `
 
 export const ButtonsContainer = styled.div`
   width: 100%;
   display: flex;
-   
+
   button {
     width: 100%;
     margin: 1rem;
@@ -114,12 +114,12 @@ export const ButtonsContainer = styled.div`
     font-size: 1.2rem;
     font-weight: 900;
     color: white;
-    background-color: #61C102;
+    background-color: #61c102;
     transition: 0.2s ease-in-out;
     cursor: pointer;
 
     &:hover {
-      background-color: #FF8A00;
+      background-color: #ff8a00;
     }
   }
 `

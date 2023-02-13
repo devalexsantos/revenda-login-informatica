@@ -1,15 +1,15 @@
-import { SeparatorContainer } from "./style";
+import { SeparatorContainer } from './style'
 
 interface SeparatorProps {
-    title: string
+  title: string
 }
 
-export function Separator({title}: SeparatorProps){
-    return (
+export function Separator({ title }: SeparatorProps) {
+  return (
     <SeparatorContainer>
-        <div />
-            <h2>{title}</h2>
-        <div />
+      <div />
+      <h2>{title}</h2>
+      <div />
     </SeparatorContainer>
-    )
+  )
 }

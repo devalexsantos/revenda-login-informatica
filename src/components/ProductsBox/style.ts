@@ -1,27 +1,27 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ProductBoxContainer = styled.div`
-    width: 100%;
-    padding: 1rem;
+  width: 100%;
+  padding: 1rem;
 `
 
 export const ProductBoxHeader = styled.div`
-    display: flex;
-    background-color: #004563;
-    padding: 0.8rem;
-    color: white;
-    gap: 0.8rem;
-    align-items: center;
+  display: flex;
+  background-color: #004563;
+  padding: 0.8rem;
+  color: white;
+  gap: 0.8rem;
+  align-items: center;
 
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 900;
-    }
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
 `
 
 export const ProductBoxContent = styled.div`
   margin-top: 1px;
-  background-color: #FAFAFB;
+  background-color: #fafafb;
   padding: 1rem;
 `
 
@@ -32,7 +32,7 @@ export const ProductItem = styled.div`
   max-width: 200px;
   gap: 1rem;
   background-color: white;
-  border: 1px solid #ECECEC;
+  border: 1px solid #ececec;
   border-radius: 6px;
   padding: 0.8rem;
 
@@ -58,6 +58,6 @@ export const ButtonProduct = styled.button`
   transition: 0.1s ease-in-out;
 
   &:hover {
-    background-color: #FF8A00;
+    background-color: #ff8a00;
   }
 `
