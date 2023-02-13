@@ -21,6 +21,10 @@ export const HeaderContent = styled.div`
     align-items: center;
     gap: 3rem;
 
+    a {
+        text-decoration: none;
+    }
+
     .info-header {
         display: flex;
         flex-direction: column;

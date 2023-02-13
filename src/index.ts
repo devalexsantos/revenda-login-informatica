@@ -44,6 +44,10 @@ export const AboutContainer = styled.div`
     .btn--container {
         display: flex;
         gap: 1.5rem;
+
+        a {
+            text-decoration: none;
+        }
     }
 
     .icons--container {

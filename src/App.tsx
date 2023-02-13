@@ -3,6 +3,7 @@ import { AboutContainer, Button, Footer, FooterContainer, MainContainer } from "
 import { Header } from "./components/Header";
 import { ProductBox } from "./components/ProductsBox";
 import { Separator } from "./components/Separator";
+import { WhatsAppBox } from './components/WhatsAppBox';
 
 import { DesktopList } from './dataProducts/desktops/DesktopsList';
 import { PCGamerList } from './dataProducts/gamer/PCGamerList';
@@ -35,7 +36,7 @@ export function App(){
             <a className="read-more" href="https://www.login.com.br/nossa-historia" target="_blank" rel="noreferrer"><ArrowRight size={20} weight="bold" /> LEIA MAIS SOBRE A LOGIN</a>
             <div className="btn--container">
               <Button variant="primary"> CADASTRE-SE</Button>
-              <Button variant="whats"><WhatsappLogo size={32} weight="regular" /> CHAMAR NO WHATS</Button>
+              <a href="https://wa.me/5571987252721" target="_blank" rel="noreferrer"><Button variant="whats"><WhatsappLogo size={32} weight="regular" /> CHAMAR NO WHATS</Button></a>
             </div>
             <div className="icons--container">
               <span><WhatsappLogo size={32} weight="regular" color="#0088C2" /><strong> (71) 98725-2721</strong></span>
@@ -46,6 +47,7 @@ export function App(){
           </AboutContainer>
         </FooterContainer>
       </Footer>
+      <WhatsAppBox />
     </>
   )
 }

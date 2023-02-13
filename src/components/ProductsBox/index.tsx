@@ -93,7 +93,7 @@ export function ProductBox({icon, title, data}: ProductBoxProps) {
             <div className="navigation-wrapper">
               <ProductBoxContent ref={sliderRef} className="keen-slider">
                 {data && data.map((product, index) => (
-                  <ProductItem className="keen-slider__slide">
+                  <ProductItem key={index} className="keen-slider__slide">
                     <img src={product.img} alt="" />
                     <p>{product.title}</p>
                     <ButtonProduct>VER PREÇO</ButtonProduct>
