@@ -10,6 +10,37 @@ export const SignUpContainer = styled.div`
 
   color: white;
 
+  .errors--message {
+    font-size: 0.8rem;
+    color: red;
+  }
+
+  .back--btn {
+    width: 200px;
+    padding: 0.5rem 2rem;
+    border: 1px solid white;
+    color: white;
+    background: none;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #004563;
+      border: 1px solid #004563;
+    }
+  }
+
+  .logo--brand {
+    width: 250px;
+  }
+
   h1 {
     font-weight: 900;
   }

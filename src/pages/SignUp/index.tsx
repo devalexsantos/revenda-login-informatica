@@ -5,17 +5,53 @@ import {
   ButtonsContainer,
   SignUpContainer,
 } from './style'
+import { useNavigate } from 'react-router-dom'
+
+import logoLogin from '../../assets/logo-login.svg'
+import { ArrowLeft } from 'phosphor-react'
+import { useForm } from 'react-hook-form'
+import emailjs from 'emailjs-com'
 
 export function SignUp() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm()
+  const navigate = useNavigate()
+
+  const onSubmit = async (data: any) => {
+    await emailjs
+      .send('service_z6jmke6', 'template_smltmg2', data, '3KjJJwPw5QY1yA2OB')
+      .then(
+        (result) => {
+          console.log(result.text)
+        },
+        (error) => {
+          console.log(error)
+          alert('Houve um erro. Por favor tente novamente mais tarde.')
+        },
+      )
+  }
+
   return (
     <SignUpContainer>
+      <button onClick={() => navigate('/')} className="back--btn">
+        <ArrowLeft size={16} />
+        Voltar
+      </button>
+      <img
+        className="logo--brand"
+        src={logoLogin}
+        alt="Logo da Login Informática"
+      />
       <h1>CADASTRE-SE</h1>
       <p>
         Faça a solicitação do seu cadastro para conferir os preços e solicitar
         um orçamento personalizado.
       </p>
 
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <BoxInfoContainer>
           <BoxInfoHeader>
             <h3>DADOS DA EMPRESA</h3>
@@ -25,67 +61,93 @@ export function SignUp() {
             <div className="form--group">
               <label>
                 <span>* Razão Social:</span>
-                <input name="corporate-name" required />
+                <input {...register('corporateName', { required: true })} />
+                {errors?.corporateName?.type === 'required' && (
+                  <h3 className="errors--message">Este campo é obrigatório</h3>
+                )}
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>* CNPJ:</span>
-                <input name="cnpj" required />
+                <input {...register('cnpj', { required: true })} />
+                {errors?.cnpj?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
 
               <label>
                 <span>Inscrição Estadual:</span>
-                <input name="state-registration" />
+                <input {...register('stateRegistration')} />
               </label>
 
               <label>
                 <span>Inscrição Municipal:</span>
-                <input name="municipal-registration" />
+                <input {...register('municipalRegistration')} />
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>* Endereço:</span>
-                <input name="address" required />
+                <input {...register('address', { required: true })} />
+                {errors?.address?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>* Contato (Nome):</span>
-                <input name="contact-name" required />
+                <input {...register('contactName', { required: true })} />
+                {errors?.contactName?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
 
               <label>
                 <span>* Área / Setor:</span>
-                <input name="contact-area" required />
+                <input {...register('contactArea', { required: true })} />
+                {errors?.contactArea?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>* Telefone:</span>
-                <input name="contact-number-phone" required />
+                <input
+                  {...register('contactNumberPhone', { required: true })}
+                />
+                {errors?.contactNumberPhone?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
 
               <label>
                 <span>Fax:</span>
-                <input name="contact-number-fax" />
+                <input {...register('contactNumberFax')} />
               </label>
 
               <label>
                 <span>* Email:</span>
-                <input name="contact-email" required />
+                <input {...register('contactEmail', { required: true })} />
+                {errors?.contactEmail?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>* Ramo de Atividade:</span>
-                <input name="line-of-business" required />
+                <input {...register('lineOfBusiness', { required: true })} />
+                {errors?.lineOfBusiness?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
             </div>
           </BoxInfoContent>
@@ -100,21 +162,30 @@ export function SignUp() {
             <div className="form--group">
               <label>
                 <span>Fornecedor 01:</span>
-                <input name="supplier-01" placeholder="Contato / Telefone" />
+                <input
+                  {...register('supplier01')}
+                  placeholder="Contato / Telefone"
+                />
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>Fornecedor 02:</span>
-                <input name="supplier-02" placeholder="Contato / Telefone" />
+                <input
+                  {...register('supplier02')}
+                  placeholder="Contato / Telefone"
+                />
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>Fornecedor 03:</span>
-                <input name="supplier-03" placeholder="Contato / Telefone" />
+                <input
+                  {...register('supplier03')}
+                  placeholder="Contato / Telefone"
+                />
               </label>
             </div>
           </BoxInfoContent>
@@ -129,84 +200,52 @@ export function SignUp() {
             <div className="form--group">
               <label>
                 <span>* Banco 01:</span>
-                <input name="bank-01" required />
+                <input {...register('bank01', { required: true })} />
+                {errors?.bank01?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
               <label>
                 <span>* Nome do Gerente:</span>
-                <input name="bank-manager-01" required />
+                <input {...register('bankManager01', { required: true })} />
+                {errors?.bankManager01?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
               <label>
                 <span>* Telefone de Contato:</span>
-                <input name="bank-manager-contact-number-01" required />
+                <input
+                  {...register('bankManagerContactNumber01', {
+                    required: true,
+                  })}
+                />
+                {errors?.bankManagerContactNumber01?.type === 'required' && (
+                  <p className="errors--message">Este campo é obrigatório</p>
+                )}
               </label>
             </div>
 
             <div className="form--group">
               <label>
                 <span>Banco 02:</span>
-                <input name="bank-02" />
+                <input {...register('bank02')} />
               </label>
               <label>
                 <span>Nome do Gerente:</span>
-                <input name="bank-manager-02" />
+                <input {...register('bankManager02')} />
               </label>
               <label>
                 <span>Telefone de Contato:</span>
-                <input name="bank-manager-contact-number-02" />
-              </label>
-            </div>
-          </BoxInfoContent>
-        </BoxInfoContainer>
-
-        <BoxInfoContainer>
-          <BoxInfoHeader>
-            <h3>DOCUMENTOS</h3>
-          </BoxInfoHeader>
-
-          <BoxInfoContent>
-            <div className="form--group--documents">
-              <label>
-                <span>* Contrato Social ou última alteração contratual:</span>
-                <input
-                  accept=".jpg,.jpeg,.doc,.docx, .pdf"
-                  size={512000}
-                  type="file"
-                  name="contract"
-                  required
-                />
-              </label>
-            </div>
-
-            <div className="form--group--documents">
-              <label>
-                <span>* Comprovante de endereço em nome da empresa:</span>
-                <input
-                  accept=".jpg,.jpeg,.doc,.docx,.pdf"
-                  size={512000}
-                  type="file"
-                  name="proof-of-residence"
-                  required
-                />
-              </label>
-            </div>
-
-            <div className="form--group--documents">
-              <label>
-                <span>* Cópia de RG dos sócios:</span>
-                <input
-                  accept=".jpg,.jpeg,.doc,.docx,.pdf"
-                  size={512000}
-                  type="file"
-                  name="documents-of-partners"
-                  required
-                />
+                <input {...register('bankManagerContactNumber02')} />
               </label>
             </div>
           </BoxInfoContent>
         </BoxInfoContainer>
 
         <ButtonsContainer>
-          <button type="submit">CADASTRAR-SE</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Enviando...' : 'CADASTRAR-SE'}
+          </button>
         </ButtonsContainer>
       </form>
     </SignUpContainer>
