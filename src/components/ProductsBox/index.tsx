@@ -16,9 +16,10 @@ interface ProductBoxProps {
   title: string
   data: { img: string; title: string }[]
   slidePerView?: number
+  openDialog: (state: boolean) => void
 }
 
-export function ProductBox({ icon, title, data }: ProductBoxProps) {
+export function ProductBox({ icon, title, data, openDialog }: ProductBoxProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -101,7 +102,9 @@ export function ProductBox({ icon, title, data }: ProductBoxProps) {
               <ProductItem key={index} className="keen-slider__slide">
                 <img src={product.img} alt="" />
                 <p>{product.title}</p>
-                <ButtonProduct>VER PREÇO</ButtonProduct>
+                <ButtonProduct onClick={() => openDialog(true)}>
+                  VER PREÇO
+                </ButtonProduct>
               </ProductItem>
             ))}
         </ProductBoxContent>
