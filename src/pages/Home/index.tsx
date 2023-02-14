@@ -8,7 +8,6 @@ import { DesktopList } from '../../dataProducts/desktops/DesktopsList'
 import { PCGamerList } from '../../dataProducts/gamer/PCGamerList'
 import { MiniPCList } from '../../dataProducts/miniPCs/MiniPCList'
 import { Monitores } from '../../dataProducts/monitores/Monitores'
-import { PriceRequestModal } from '../../components/PriceRequestModal'
 import { useContext } from 'react'
 import { PriceRequestContext } from '../../contexts/PricesRequestContext'
 
@@ -44,7 +43,6 @@ export function Home() {
           openDialog={setOpenDialog}
         />
       </MainContainer>
-      <PriceRequestModal />
       <WhatsAppBox />
     </>
   )
