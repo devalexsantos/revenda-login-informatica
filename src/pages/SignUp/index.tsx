@@ -22,7 +22,12 @@ export function SignUp() {
 
   const onSubmit = async (data: any) => {
     await emailjs
-      .send('service_z6jmke6', 'template_smltmg2', data, '3KjJJwPw5QY1yA2OB')
+      .send(
+        import.meta.env.VITE_SERVICE_ID_EMAILJS,
+        import.meta.env.VITE_TEMPLATE_SIGNUP,
+        data,
+        import.meta.env.VITE_PUBLIC_KEY_EMAILJS,
+      )
       .then(
         (result) => {
           console.log(result.text)
