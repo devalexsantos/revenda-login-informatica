@@ -1,10 +1,11 @@
 import { Button, HeaderContainer, HeaderContent } from './style'
 import sellerVector from '../../assets/revenda-login-header.svg'
 import { WhatsappLogo } from 'phosphor-react'
-import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { PriceRequestContext } from '../../contexts/PricesRequestContext'
 
 export function Header() {
-  const navigate = useNavigate()
+  const { setOpenDialog } = useContext(PriceRequestContext)
 
   return (
     <HeaderContainer>
@@ -12,8 +13,8 @@ export function Header() {
         <div className="info-header">
           <h1>SEJA UM REVENDEDOR LOGIN</h1>
           <div className="btns-container">
-            <Button onClick={() => navigate('/cadastro')} variant="primary">
-              CADASTRE-SE
+            <Button onClick={() => setOpenDialog(true)} variant="primary">
+              SOLICITAR PREÇOS
             </Button>
             <a
               href="https://wa.me/5571987252721"

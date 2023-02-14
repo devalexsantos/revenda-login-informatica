@@ -1,8 +1,11 @@
 import { ArrowRight, EnvelopeOpen, Globe, WhatsappLogo } from 'phosphor-react'
 import { AboutContainer, Button, Footer, FooterContainer } from './style'
 import { Outlet } from 'react-router-dom'
+import { useContext } from 'react'
+import { PriceRequestContext } from '../contexts/PricesRequestContext'
 
 export function DefaultLayout() {
+  const { setOpenDialog } = useContext(PriceRequestContext)
   return (
     <>
       <Outlet />
@@ -26,7 +29,10 @@ export function DefaultLayout() {
               <ArrowRight size={20} weight="bold" /> LEIA MAIS SOBRE A LOGIN
             </a>
             <div className="btn--container">
-              <Button variant="primary"> CADASTRE-SE</Button>
+              <Button variant="primary" onClick={() => setOpenDialog(true)}>
+                {' '}
+                SOLICITAR PREÇOS
+              </Button>
               <a
                 href="https://wa.me/5571987252721"
                 target="_blank"

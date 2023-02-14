@@ -1,4 +1,4 @@
-import { Content, MainContainer, Overlay } from './style'
+import { MainContainer } from './style'
 import { Header } from '../../components/Header'
 import { ProductBox } from '../../components/ProductsBox'
 import { Separator } from '../../components/Separator'
@@ -8,13 +8,12 @@ import { DesktopList } from '../../dataProducts/desktops/DesktopsList'
 import { PCGamerList } from '../../dataProducts/gamer/PCGamerList'
 import { MiniPCList } from '../../dataProducts/miniPCs/MiniPCList'
 import { Monitores } from '../../dataProducts/monitores/Monitores'
-
-import * as Dialog from '@radix-ui/react-dialog'
-import { useState } from 'react'
+import { PriceRequestModal } from '../../components/PriceRequestModal'
+import { useContext } from 'react'
+import { PriceRequestContext } from '../../contexts/PricesRequestContext'
 
 export function Home() {
-  const [openDialog, setOpenDialog] = useState(false)
-
+  const { setOpenDialog } = useContext(PriceRequestContext)
   return (
     <>
       <Header />
@@ -45,17 +44,7 @@ export function Home() {
           openDialog={setOpenDialog}
         />
       </MainContainer>
-
-      <Dialog.Root open={openDialog} onOpenChange={setOpenDialog}>
-        <Dialog.Portal>
-          <Overlay />
-          <Content>
-            asdasdasd -{' '}
-            <button onClick={() => setOpenDialog(false)}>Fechar</button>
-          </Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-
+      <PriceRequestModal />
       <WhatsAppBox />
     </>
   )
