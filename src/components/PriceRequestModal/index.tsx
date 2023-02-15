@@ -1,28 +1,24 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
-import { useContext, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useContext, useState, useRef } from 'react'
+import { useForm, FieldValues } from 'react-hook-form'
 import { PriceRequestContext } from '../../contexts/PricesRequestContext'
 import { Content, Overlay } from './style'
 import emailjs from 'emailjs-com'
 import ReCAPTCHA from 'react-google-recaptcha'
 
 export function PriceRequestModal() {
+  const refCaptcha = useRef<ReCAPTCHA>(null)
+
   const { openDialog, setOpenDialog } = useContext(PriceRequestContext)
 
   const [sendedRequest, SetSendedRequest] = useState(false)
 
-  const [reCaptchaSolved, setReCaptchaSolved] = useState(false)
-
   const { register, handleSubmit } = useForm()
 
-  const onSubmitInfo = async (data: any) => {
-    if (!reCaptchaSolved) {
-      alert('Por favor marque o reCaptcha do Google')
-      return
-    }
-
-    const newData = {
+  const onSubmitInfo = (data: FieldValues) => {
+    const token = refCaptcha.current?.getValue()
+    const toSend = {
       cnpj: data.cnpj,
       email: data.email,
       phone: data.phone,
@@ -33,22 +29,30 @@ export function PriceRequestModal() {
       monitors: data.monitors ? 'X' : '',
     }
 
-    await emailjs
-      .send(
-        import.meta.env.VITE_SERVICE_ID_EMAILJS,
-        import.meta.env.VITE_TEMPLATE_REQUEST_PRICE,
-        newData,
-        import.meta.env.VITE_PUBLIC_KEY_EMAILJS,
-      )
-      .then(
-        (result) => {
-          console.log(result.text)
-        },
-        (error) => {
-          console.log(error)
-          alert('Houve um erro. Por favor tente novamente mais tarde.')
-        },
-      )
+    if (token) {
+      const params = {
+        ...toSend,
+        'g-recaptcha-response': token,
+      }
+      emailjs
+        .send(
+          import.meta.env.VITE_SERVICE_ID_EMAILJS,
+          import.meta.env.VITE_TEMPLATE_REQUEST_PRICE,
+          params,
+          import.meta.env.VITE_PUBLIC_KEY_EMAILJS,
+        )
+        .then(
+          (result) => {
+            console.log(result.text)
+          },
+          (error) => {
+            console.log(error)
+            alert('Houve um erro. Por favor tente novamente mais tarde.')
+          },
+        )
+    } else {
+      alert('Por favor marque o reCaptcha do Google')
+    }
   }
 
   return (
@@ -143,8 +147,8 @@ export function PriceRequestModal() {
                     </label>
                   </div>
                   <ReCAPTCHA
+                    ref={refCaptcha}
                     sitekey={import.meta.env.VITE_GOOGLE_RECAPTCHA}
-                    onChange={() => setReCaptchaSolved(true)}
                   />
                   <button type="submit">Enviar</button>
                 </div>
