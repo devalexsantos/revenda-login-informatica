@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { X } from 'phosphor-react'
+import { CheckCircle, X } from 'phosphor-react'
 import { useContext, useState, useRef } from 'react'
 import { useForm, FieldValues } from 'react-hook-form'
 import { PriceRequestContext } from '../../contexts/PricesRequestContext'
@@ -12,9 +12,38 @@ export function PriceRequestModal() {
 
   const { openDialog, setOpenDialog } = useContext(PriceRequestContext)
 
-  const [sendedRequest, SetSendedRequest] = useState(false)
+  const [sendedRequest, SetSendedRequest] = useState(true)
 
-  const { register, handleSubmit } = useForm()
+  const [phoneFormated, setPhoneFormated] = useState('')
+  const [cnpjFormated, setCnpjFormated] = useState('')
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm()
+
+  const handleChangePhone = (phone: string) => {
+    const formatingValuePhone = phone
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2')
+      .replace(/(-\d{4})\d+?$/, '$1')
+
+    setPhoneFormated(formatingValuePhone)
+  }
+
+  const handleChangeCnpj = (cnpj: string) => {
+    const formatingCnpj = cnpj
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1/$2')
+      .replace(/(\d{4})(\d)/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1')
+
+    setCnpjFormated(formatingCnpj)
+  }
 
   const onSubmitInfo = (data: FieldValues) => {
     const token = refCaptcha.current?.getValue()
@@ -43,7 +72,7 @@ export function PriceRequestModal() {
         )
         .then(
           (result) => {
-            console.log(result.text)
+            SetSendedRequest(true)
           },
           (error) => {
             console.log(error)
@@ -67,10 +96,15 @@ export function PriceRequestModal() {
                 <X size={24} />
               </button>
             </header>
-            <p>Dados enviados com sucesso</p>
-            <button onClick={() => SetSendedRequest(false)}>
-              Solicitar novamente
-            </button>
+            <div className="sended--form">
+              <CheckCircle size={100} color="#61c102" />
+              <p>
+                Dados enviados com sucesso, retornaremos o mais breve possível.
+              </p>
+              <button onClick={() => SetSendedRequest(false)}>
+                Solicitar novamente
+              </button>
+            </div>
           </Content>
         ) : (
           <Content>
@@ -128,30 +162,89 @@ export function PriceRequestModal() {
                   </span>
                   <div className="contact--inputs">
                     <label>
+                      <span>Nome Empresarial:</span>
+                      <input
+                        type="text"
+                        {...register('company', { required: true })}
+                      />
+                      {errors?.company?.type === 'required' && (
+                        <p className="errors--message">
+                          Este campo é obrigatório
+                        </p>
+                      )}
+                    </label>
+                  </div>
+                  <div className="contact--inputs">
+                    <label>
                       <span>Telefone:</span>
-                      <input type="text" {...register('phone')} />
+                      <input
+                        type="text"
+                        {...register('phone', {
+                          required: true,
+                          minLength: 15,
+                        })}
+                        onChange={(e) => handleChangePhone(e.target.value)}
+                        value={phoneFormated}
+                      />
+                      {errors?.phone?.type === 'required' && (
+                        <p className="errors--message">
+                          Este campo é obrigatório
+                        </p>
+                      )}
+                      {errors?.phone?.type === 'minLength' && (
+                        <p className="errors--message">
+                          Digite um número válido
+                        </p>
+                      )}
                     </label>
                   </div>
 
                   <div className="contact--inputs">
                     <label>
-                      <span>CNPJ:</span>
-                      <input type="text" {...register('cnpj')} />
+                      <span>CNPJ (apenas números):</span>
+                      <input
+                        type="text"
+                        {...register('cnpj', { required: true, minLength: 18 })}
+                        onChange={(e) => handleChangeCnpj(e.target.value)}
+                        value={cnpjFormated}
+                      />
+                      {errors?.cnpj?.type === 'required' && (
+                        <p className="errors--message">
+                          Este campo é obrigatório
+                        </p>
+                      )}
+                      {errors?.cnpj?.type === 'minLength' && (
+                        <p className="errors--message">Digite um CNPJ válido</p>
+                      )}
                     </label>
                   </div>
 
                   <div className="contact--inputs">
                     <label>
                       <span>E-mail:</span>
-                      <input type="text" {...register('email')} />
+                      <input
+                        type="email"
+                        {...register('email', { required: true })}
+                      />
+                      {errors?.email?.type === 'required' && (
+                        <p className="errors--message">
+                          Este campo é obrigatório
+                        </p>
+                      )}
                     </label>
                   </div>
+                </div>
+                <div className="recaptcha--area">
                   <ReCAPTCHA
                     ref={refCaptcha}
                     sitekey={import.meta.env.VITE_GOOGLE_RECAPTCHA}
                   />
-                  <button type="submit">Enviar</button>
                 </div>
+                {isSubmitting ? (
+                  <p>Enviando...</p>
+                ) : (
+                  <button type="submit">Enviar</button>
+                )}
               </div>
             </form>
           </Content>

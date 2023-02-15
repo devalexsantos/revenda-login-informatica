@@ -42,6 +42,34 @@ export const Content = styled(Dialog.Content)`
     }
   }
 
+  .sended--form {
+    margin-top: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    p {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      margin: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 900;
+      color: white;
+      background-color: #ff8a00;
+      transition: 0.2s ease-in-out;
+      cursor: pointer;
+    }
+  }
+
   form {
     font-size: 1.1rem;
     color: #525252;
@@ -82,11 +110,21 @@ export const Content = styled(Dialog.Content)`
           gap: 0.3rem;
 
           input {
+            font-size: 1rem;
             border-radius: 6px;
             border: 1px solid #525252;
             padding: 0.5rem;
           }
+
+          p {
+            font-size: 0.8rem;
+            color: red;
+          }
         }
+      }
+
+      .recaptcha--area {
+        margin-top: 15px;
       }
     }
   }
