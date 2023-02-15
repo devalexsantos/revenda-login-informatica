@@ -13,6 +13,7 @@ export const Content = styled(Dialog.Content)`
   color: #525252;
   width: 100%;
   max-width: 400px;
+  max-height: 80vh;
   border-radius: 6px;
   padding: 2.5rem 3rem;
   background: white;
@@ -24,6 +25,7 @@ export const Content = styled(Dialog.Content)`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow-y: auto;
 
   header {
     display: flex;

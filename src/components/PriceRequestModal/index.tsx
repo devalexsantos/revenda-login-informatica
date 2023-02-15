@@ -12,7 +12,7 @@ export function PriceRequestModal() {
 
   const { openDialog, setOpenDialog } = useContext(PriceRequestContext)
 
-  const [sendedRequest, SetSendedRequest] = useState(true)
+  const [sendedRequest, SetSendedRequest] = useState(false)
 
   const [phoneFormated, setPhoneFormated] = useState('')
   const [cnpjFormated, setCnpjFormated] = useState('')
@@ -87,168 +87,175 @@ export function PriceRequestModal() {
   return (
     <Dialog.Root open={openDialog} onOpenChange={setOpenDialog}>
       <Dialog.Portal>
-        <Overlay />
-        {sendedRequest ? (
-          <Content>
-            <header>
-              <h1>SOLICITAR PREÇOS</h1>
-              <button onClick={() => setOpenDialog(false)}>
-                <X size={24} />
-              </button>
-            </header>
-            <div className="sended--form">
-              <CheckCircle size={100} color="#61c102" />
+        <Overlay>
+          {sendedRequest ? (
+            <Content>
+              <header>
+                <h1>SOLICITAR PREÇOS</h1>
+                <button onClick={() => setOpenDialog(false)}>
+                  <X size={24} />
+                </button>
+              </header>
+              <div className="sended--form">
+                <CheckCircle size={100} color="#61c102" />
+                <p>
+                  Dados enviados com sucesso, retornaremos o mais breve
+                  possível.
+                </p>
+                <button onClick={() => SetSendedRequest(false)}>
+                  Solicitar novamente
+                </button>
+              </div>
+            </Content>
+          ) : (
+            <Content>
+              <header>
+                <h1>SOLICITAR PREÇOS</h1>
+                <button onClick={() => setOpenDialog(false)}>
+                  <X size={24} />
+                </button>
+              </header>
               <p>
-                Dados enviados com sucesso, retornaremos o mais breve possível.
+                Por favor preencha os dados abaixo para receber uma lista de
+                preços:
               </p>
-              <button onClick={() => SetSendedRequest(false)}>
-                Solicitar novamente
-              </button>
-            </div>
-          </Content>
-        ) : (
-          <Content>
-            <header>
-              <h1>SOLICITAR PREÇOS</h1>
-              <button onClick={() => setOpenDialog(false)}>
-                <X size={24} />
-              </button>
-            </header>
-            <p>
-              Por favor preencha os dados abaixo para receber uma lista de
-              preços:
-            </p>
 
-            <form onSubmit={handleSubmit(onSubmitInfo)}>
-              <div className="form--group">
-                <span>
-                  <strong>Quais categorias você deseja receber:</strong>
-                </span>
-                <div className="input--select">
-                  <label>
-                    <input type="checkbox" {...register('all')} />
-                    <span>Todas</span>
-                  </label>
-                </div>
-
-                <div className="input--select">
-                  <label>
-                    <input type="checkbox" {...register('desktops')} />
-                    <span>Computadores</span>
-                  </label>
-                </div>
-                <div className="input--select">
-                  <label>
-                    <input type="checkbox" {...register('gamer')} />
-                    <span>Linha Gamer</span>
-                  </label>
-                </div>
-                <div className="input--select">
-                  <label>
-                    <input type="checkbox" {...register('miniPCs')} />
-                    <span>Mini PCs</span>
-                  </label>
-                </div>
-                <div className="input--select">
-                  <label>
-                    <input type="checkbox" {...register('monitors')} />
-                    <span>Monitores</span>
-                  </label>
-                </div>
-
+              <form onSubmit={handleSubmit(onSubmitInfo)}>
                 <div className="form--group">
                   <span>
-                    <strong>Dados para contato:</strong>
+                    <strong>Quais categorias você deseja receber:</strong>
                   </span>
-                  <div className="contact--inputs">
+                  <div className="input--select">
                     <label>
-                      <span>Nome Empresarial:</span>
-                      <input
-                        type="text"
-                        {...register('company', { required: true })}
-                      />
-                      {errors?.company?.type === 'required' && (
-                        <p className="errors--message">
-                          Este campo é obrigatório
-                        </p>
-                      )}
-                    </label>
-                  </div>
-                  <div className="contact--inputs">
-                    <label>
-                      <span>Telefone:</span>
-                      <input
-                        type="text"
-                        {...register('phone', {
-                          required: true,
-                          minLength: 15,
-                        })}
-                        onChange={(e) => handleChangePhone(e.target.value)}
-                        value={phoneFormated}
-                      />
-                      {errors?.phone?.type === 'required' && (
-                        <p className="errors--message">
-                          Este campo é obrigatório
-                        </p>
-                      )}
-                      {errors?.phone?.type === 'minLength' && (
-                        <p className="errors--message">
-                          Digite um número válido
-                        </p>
-                      )}
+                      <input type="checkbox" {...register('all')} />
+                      <span>Todas</span>
                     </label>
                   </div>
 
-                  <div className="contact--inputs">
+                  <div className="input--select">
                     <label>
-                      <span>CNPJ (apenas números):</span>
-                      <input
-                        type="text"
-                        {...register('cnpj', { required: true, minLength: 18 })}
-                        onChange={(e) => handleChangeCnpj(e.target.value)}
-                        value={cnpjFormated}
-                      />
-                      {errors?.cnpj?.type === 'required' && (
-                        <p className="errors--message">
-                          Este campo é obrigatório
-                        </p>
-                      )}
-                      {errors?.cnpj?.type === 'minLength' && (
-                        <p className="errors--message">Digite um CNPJ válido</p>
-                      )}
+                      <input type="checkbox" {...register('desktops')} />
+                      <span>Computadores</span>
+                    </label>
+                  </div>
+                  <div className="input--select">
+                    <label>
+                      <input type="checkbox" {...register('gamer')} />
+                      <span>Linha Gamer</span>
+                    </label>
+                  </div>
+                  <div className="input--select">
+                    <label>
+                      <input type="checkbox" {...register('miniPCs')} />
+                      <span>Mini PCs</span>
+                    </label>
+                  </div>
+                  <div className="input--select">
+                    <label>
+                      <input type="checkbox" {...register('monitors')} />
+                      <span>Monitores</span>
                     </label>
                   </div>
 
-                  <div className="contact--inputs">
-                    <label>
-                      <span>E-mail:</span>
-                      <input
-                        type="email"
-                        {...register('email', { required: true })}
-                      />
-                      {errors?.email?.type === 'required' && (
-                        <p className="errors--message">
-                          Este campo é obrigatório
-                        </p>
-                      )}
-                    </label>
+                  <div className="form--group">
+                    <span>
+                      <strong>Dados para contato:</strong>
+                    </span>
+                    <div className="contact--inputs">
+                      <label>
+                        <span>Nome Empresarial:</span>
+                        <input
+                          type="text"
+                          {...register('company', { required: true })}
+                        />
+                        {errors?.company?.type === 'required' && (
+                          <p className="errors--message">
+                            Este campo é obrigatório
+                          </p>
+                        )}
+                      </label>
+                    </div>
+                    <div className="contact--inputs">
+                      <label>
+                        <span>Telefone:</span>
+                        <input
+                          type="text"
+                          {...register('phone', {
+                            required: true,
+                            minLength: 15,
+                          })}
+                          onChange={(e) => handleChangePhone(e.target.value)}
+                          value={phoneFormated}
+                        />
+                        {errors?.phone?.type === 'required' && (
+                          <p className="errors--message">
+                            Este campo é obrigatório
+                          </p>
+                        )}
+                        {errors?.phone?.type === 'minLength' && (
+                          <p className="errors--message">
+                            Digite um número válido
+                          </p>
+                        )}
+                      </label>
+                    </div>
+
+                    <div className="contact--inputs">
+                      <label>
+                        <span>CNPJ (apenas números):</span>
+                        <input
+                          type="text"
+                          {...register('cnpj', {
+                            required: true,
+                            minLength: 18,
+                          })}
+                          onChange={(e) => handleChangeCnpj(e.target.value)}
+                          value={cnpjFormated}
+                        />
+                        {errors?.cnpj?.type === 'required' && (
+                          <p className="errors--message">
+                            Este campo é obrigatório
+                          </p>
+                        )}
+                        {errors?.cnpj?.type === 'minLength' && (
+                          <p className="errors--message">
+                            Digite um CNPJ válido
+                          </p>
+                        )}
+                      </label>
+                    </div>
+
+                    <div className="contact--inputs">
+                      <label>
+                        <span>E-mail:</span>
+                        <input
+                          type="email"
+                          {...register('email', { required: true })}
+                        />
+                        {errors?.email?.type === 'required' && (
+                          <p className="errors--message">
+                            Este campo é obrigatório
+                          </p>
+                        )}
+                      </label>
+                    </div>
                   </div>
+                  <div className="recaptcha--area">
+                    <ReCAPTCHA
+                      ref={refCaptcha}
+                      sitekey={import.meta.env.VITE_GOOGLE_RECAPTCHA}
+                    />
+                  </div>
+                  {isSubmitting ? (
+                    <p>Enviando...</p>
+                  ) : (
+                    <button type="submit">Enviar</button>
+                  )}
                 </div>
-                <div className="recaptcha--area">
-                  <ReCAPTCHA
-                    ref={refCaptcha}
-                    sitekey={import.meta.env.VITE_GOOGLE_RECAPTCHA}
-                  />
-                </div>
-                {isSubmitting ? (
-                  <p>Enviando...</p>
-                ) : (
-                  <button type="submit">Enviar</button>
-                )}
-              </div>
-            </form>
-          </Content>
-        )}
+              </form>
+            </Content>
+          )}
+        </Overlay>
       </Dialog.Portal>
     </Dialog.Root>
   )
